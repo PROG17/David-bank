@@ -1,1 +1,22 @@
-﻿
+﻿@model DaBank.Models.ViewModel
+
+
+@{
+    var customers = Model.bank.Customers;
+
+    <div style="margin-top:20px;">
+
+        @for (int i = 0; i < customers.Count; i++)
+        {<ul>
+                <li>Namn: @customers[i].Name</li>
+                @foreach (var item in customers[i].Account)
+                {
+                <li>Kontonummer: @item.AccountNumber</li>
+                <li>Summa: @item.Moneyz kr</li>
+                }
+            </ul>
+        }
+
+
+    </div>
+}
