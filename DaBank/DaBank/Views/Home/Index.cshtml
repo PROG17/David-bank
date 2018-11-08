@@ -7,13 +7,18 @@
     <div style="margin-top:20px;">
 
         @for (int i = 0; i < customers.Count; i++)
-        {<ul>
-                <li>Namn: @customers[i].Name</li>
+        {
+            <ul>
+                <li style="list-style:none;"><b>@customers[i].Name</b></li>
+                <li style="padding-bottom:10px; list-style:none;">Kundnummer: @customers[i].CustomerNumber</li>
                 @foreach (var item in customers[i].Account)
                 {
-                <li>Kontonummer: @item.AccountNumber</li>
-                <li>Summa: @item.Moneyz kr</li>
+
+                    <li>Kontonummer: @item.AccountNumber</li>
+                    <li>Saldo: @item.Moneyz kr</li>
+                    <br />
                 }
+
             </ul>
         }
 

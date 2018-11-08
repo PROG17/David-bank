@@ -20,21 +20,22 @@ namespace DaBank.Controllers
 
             bankRep.Customers = new List<Customer>
             {
-                new Customer("David Agdelius", new List<Account>
+                new Customer("David Agdelius", 1, new List<Account>
                 {
-                    new Account(1, 10000)
+                    new Account(10, 10000),
+                    new Account(11, 400)
                 }),
-                new Customer("Thorleif Svensson", new List<Account>
+                new Customer("Thorleif Svensson", 2, new List<Account>
                 {
-                    new Account(2, 5000)
+                    new Account(222, 5000)
                 }),
-                new Customer("Ronny Karlsson", new List<Account>
+                new Customer("Ronny Karlsson", 3, new List<Account>
                 {
-                    new Account(3, 5000000)
+                    new Account(34, 5000000)
                 }),
-                new Customer("Eskil Knutsson", new List<Account>
+                new Customer("Eskil Knutsson", 4, new List<Account>
                 {
-                    new Account(1, 100)
+                    new Account(21, 100)
                 })
             };
 
