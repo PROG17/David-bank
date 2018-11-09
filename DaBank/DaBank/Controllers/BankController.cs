@@ -14,6 +14,27 @@ namespace DaBank.Controllers
             return View();
         }
 
+        public Account Withdraw(Account acc, decimal value)
+        {
+            if (acc.Moneyz < value)
+            {
+                return null;
+            }
+            else
+            {
+                acc.Moneyz -= value;
+            }
+
+            return acc;
+        }
+
+        public Account Deposit(Account acc, decimal value)
+        {
+            acc.Moneyz += value;
+
+            return acc;
+        }
+
         public BankRepository CreateBankRep()
         {
             var bankRep = new BankRepository();
@@ -40,6 +61,6 @@ namespace DaBank.Controllers
             };
 
             return bankRep;
-        } 
+        }
     }
 }
