@@ -34,33 +34,6 @@ namespace DaBank.Controllers
 
             return acc;
         }
-
-        public BankRepository CreateBankRep()
-        {
-            var bankRep = new BankRepository();
-
-            bankRep.Customers = new List<Customer>
-            {
-                new Customer("David Agdelius", 1, new List<Account>
-                {
-                    new Account(10, 10000),
-                    new Account(11, 400)
-                }),
-                new Customer("Thorleif Svensson", 2, new List<Account>
-                {
-                    new Account(222, 5000)
-                }),
-                new Customer("Ronny Karlsson", 3, new List<Account>
-                {
-                    new Account(34, 5000000)
-                }),
-                new Customer("Eskil Knutsson", 4, new List<Account>
-                {
-                    new Account(21, 100)
-                })
-            };
-
-            return bankRep;
-        }
+       
     }
 }

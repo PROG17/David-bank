@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DaBank.Models;
+using DaBank.Repository;
 
 namespace DaBank.Controllers
 {
@@ -12,15 +13,18 @@ namespace DaBank.Controllers
     {
         public ViewModel model = new ViewModel();
 
-        public HomeController()
+        private readonly IBankRepository _repository;
+        public HomeController(IBankRepository repository)
         {
-            var bankController = new BankController();
-
-            model.bank = bankController.CreateBankRep();
+            _repository = repository;
         }
 
+
         public IActionResult Index()
-        {        
+        {
+
+            model.Customers = _repository.GetBank().Customers;
+
             return View(model);
         }
 

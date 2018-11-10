@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DaBank.Models;
+using DaBank.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DaBank.Controllers
 {
     public class DepoWithController : Controller
     {
+
+        private readonly IBankRepository _repository;
+
+        public DepoWithController(IBankRepository repository)
+        {
+            _repository = repository;
+        }
+
         public IActionResult DepoWith(string error)
         {
-            if(error != null)
+            if (error != null)
             {
                 ViewBag.Error = error;
             }
@@ -22,19 +31,24 @@ namespace DaBank.Controllers
         {
             var bankController = new BankController();
 
-            var requestedAccount = bankController.CreateBankRep().Customers.SelectMany(x=> x.Account.Where(y=> y.AccountNumber == account)).FirstOrDefault();
+            var requestedAccount = _repository.GetAccount(account);
+
+            var bank = _repository.GetBank();
 
             if (requestedAccount != null)
             {
                 switch (submitButton)
                 {
-                    case "Deposit":                        
-                        return (View(bankController.Deposit(requestedAccount, value)));
+                    case "Deposit":
+                        var updateAcc = bankController.Deposit(requestedAccount, value);
+                        bank.Customers.SelectMany(x => x.Account.Where(y => y.AccountNumber == account)).FirstOrDefault().Moneyz = updateAcc.Moneyz;
+                        _repository.SaveBank(bank);
+                        return View(updateAcc);
                     case "Withdraw":
                         var result = bankController.Withdraw(requestedAccount, value);
-                        if(result != null)
+                        if (result != null)
                         {
-                            return (View(result));
+                            return View(result);
                         }
                         return RedirectToAction("DepoWith", new { error = "Not enough balance to withdraw." });
                     default:

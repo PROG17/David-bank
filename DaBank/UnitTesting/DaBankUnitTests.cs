@@ -9,7 +9,7 @@ namespace UnitTesting
     public class BankControllerTest
     {
 
-        public BankRepository bankRep = new BankRepository();
+        public Bank bankRep = new Bank();
 
         [TestInitialize]
         public void Init()

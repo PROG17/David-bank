@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DaBank.Models
 {
-    public class BankRepository
+    public class Bank
     {
         public List<Customer> Customers { get; set; }
     }
