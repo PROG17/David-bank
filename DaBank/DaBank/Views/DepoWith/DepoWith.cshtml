@@ -1,3 +1,17 @@
 ﻿
 <h2>DepoWith</h2>
 
+<form method="post" action="@Url.Action("Transaction", "DepoWith")">
+    <input type="text" name="Account" placeholder="Accountnumber" />
+    <input type="text" name="Value" placeholder="Value" />
+    <br />
+    <input type="submit" name="submitButton" value="Deposit">
+    <input type="submit" name="submitButton" value="Withdraw" />
+</form>
+
+@{ 
+    if(ViewBag.Error != "")
+    {
+        @ViewBag.Error
+    }
+}
