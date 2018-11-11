@@ -48,6 +48,8 @@ namespace DaBank.Controllers
                         var result = bankController.Withdraw(requestedAccount, value);
                         if (result != null)
                         {
+                            bank.Customers.SelectMany(x => x.Account.Where(y => y.AccountNumber == account)).FirstOrDefault().Moneyz = result.Moneyz;
+                            _repository.SaveBank(bank);
                             return View(result);
                         }
                         return RedirectToAction("DepoWith", new { error = "Not enough balance to withdraw." });

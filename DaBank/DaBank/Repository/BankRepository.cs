@@ -17,12 +17,16 @@ namespace DaBank.Repository
 
     public class BankRepository : IBankRepository
     {
+        private static Bank _bank;
 
-        private Bank _bank;
         public BankRepository()
         {
-            _bank = new Bank();
-            CreateBankRep();
+            if(_bank == null)
+            {
+                _bank = new Bank();
+                CreateBankRep();
+            }
+                   
         }
 
         public Bank GetBank()
@@ -32,7 +36,6 @@ namespace DaBank.Repository
 
         public Account GetAccount(int account)
         {
-
             return GetBank().Customers.SelectMany(x => x.Account.Where(y => y.AccountNumber == account)).FirstOrDefault();
         }
 
