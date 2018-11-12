@@ -58,6 +58,11 @@ namespace DaBank.Controllers
                         return RedirectToAction("DepoWith");
                 }
             }
+            else if(requestedAccount == null)
+            {
+                return RedirectToAction("DepoWith", new { error = "No account with that number." });
+
+            }
 
             return RedirectToAction("DepoWith");
 
