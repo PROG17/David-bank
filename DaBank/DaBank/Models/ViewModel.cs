@@ -7,6 +7,6 @@ namespace DaBank.Models
 {
     public class ViewModel
     {
-        public BankRepository bank { get; set; }
+        public List<Customer> Customers { get; set; }
     }
 }
