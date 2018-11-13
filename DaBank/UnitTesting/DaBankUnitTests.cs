@@ -2,6 +2,7 @@ using DaBank.Controllers;
 using DaBank.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UnitTesting
 {
@@ -63,7 +64,38 @@ namespace UnitTesting
 
             Assert.IsNull(result);
         }
+
+        [TestMethod]
+        public void TransferWithinFunds()
+        {
+            var bankController = new BankController();
+
+            decimal amount = 300, expectedAcc1Moneyz = 700, expectedAcc2Moneyz = 700;
+
+            var result = bankController.Transfer(GetAccount(10), GetAccount(11), amount);
+
+            Assert.IsTrue(result);
+            Assert.AreEqual(expectedAcc1Moneyz, GetAccount(10).Moneyz);
+            Assert.AreEqual(expectedAcc2Moneyz, GetAccount(11).Moneyz);
+        }
+
+        [TestMethod]
+        public void TransferTooMuch()
+        {
+            var bankController = new BankController();
+
+            decimal amount = 500, expectedAcc1Moneyz = 1000, expectedAcc2Moneyz = 400;
+
+            var result = bankController.Transfer(GetAccount(11), GetAccount(10), amount);
+
+            Assert.IsFalse(result);
+            Assert.AreEqual(expectedAcc1Moneyz, GetAccount(10).Moneyz);
+            Assert.AreEqual(expectedAcc2Moneyz, GetAccount(11).Moneyz);
+        }
+
+        private Account GetAccount(int accountNumber)
+        {
+            return bankRep.Customers.SelectMany(x => x.Account).FirstOrDefault(x => x.AccountNumber == accountNumber);
+        }
     }
-
-
 }

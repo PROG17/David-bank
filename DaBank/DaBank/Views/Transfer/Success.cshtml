@@ -1,0 +1,23 @@
+﻿@model Account[]
+
+@{
+    ViewData["Title"] = "Success";
+}
+
+<div class="row">
+    <div class="col-lg-2">
+        <b>Account 1: </b> @Model[0].AccountNumber
+    </div>
+    <div class="col-lg-2">
+        <b>Balance 1: </b> @Model[0].Moneyz
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-2">
+        <b>Account 1: </b> @Model[1].AccountNumber
+    </div>
+    <div class="col-lg-2">
+        <b>Balance 1: </b> @Model[1].Moneyz
+    </div>
+</div>
