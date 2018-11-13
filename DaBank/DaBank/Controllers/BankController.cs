@@ -34,6 +34,15 @@ namespace DaBank.Controllers
 
             return acc;
         }
-       
+
+        public bool Transfer(Account from, Account to, decimal amount)
+        {
+            if (Withdraw(from, amount) != null)
+                Deposit(to, amount);
+            else
+                return false;
+
+            return true;
+        }
     }
 }
