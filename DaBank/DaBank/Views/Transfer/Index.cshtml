@@ -1,0 +1,45 @@
+﻿@model Transaction
+
+@{
+    ViewData["Title"] = "Transfer";
+}
+
+<h2>Transfer moneyz</h2>
+
+<form asp-controller="Transfer" asp-action="Index" method="post">
+    <div class="row">
+        <div class="col-lg-2">
+            <label asp-for="AccountFrom"></label>
+        </div>
+        <div class="col-lg-4">
+            <input asp-for="AccountFrom" type="text" placeholder="Account from" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <label asp-for="AccountTo"></label>
+        </div>
+        <div class="col-lg-4">
+            <input asp-for="AccountTo" type="text" placeholder="Account to" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <label asp-for="Amount"></label>
+        </div>
+        <div class="col-lg-4">
+            <input asp-for="Amount" type="text" placeholder="Amount" />
+        </div>
+    </div>
+    <br />
+    <input type="submit" name="submitButton" value="Transfer">
+</form>
+
+@{
+    if (ViewBag.Error != "")
+    {
+        @ViewBag.Error
+    }
+}
